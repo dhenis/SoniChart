@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="mp.zico.org.sonichart">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Simple1Activity" />
+        <activity android:name=".Simple2Activity" />
+        <activity android:name=".Simple3Activity" />
+        <activity android:name=".Simple4Activity" />
+        <activity android:name=".Medium1Activity" />
+        <activity android:name=".Medium2Activity" />
+        <activity android:name=".Medium3Activity" />
+        <activity android:name=".Medium4Activity" />
+        <activity android:name=".Medium5Activity" />
+        <activity android:name=".Medium6Activity" />
+        <activity android:name=".Complex1Activity" />
+        <activity android:name=".Complex2Activity" />
+        <activity android:name=".Complex3Activity" />
+        <activity android:name=".Complex4Activity" />
+        <activity android:name=".Complex5Activity" />
+        <activity android:name=".Complex6Activity"></activity>
+    </application>
+
+</manifest>
