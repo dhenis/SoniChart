@@ -1,4 +1,4 @@
-package mp.zico.org.sonichart;
+package mp.zico.org.sonichartsecond;
 
 import android.content.Context;
 import android.graphics.Typeface;

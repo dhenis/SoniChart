@@ -1,9 +1,10 @@
-package mp.zico.org.sonichart;
+package mp.zico.org.sonichartsecond;
 
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -23,21 +24,24 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Complex1Activity extends AppCompatActivity implements OnChartValueSelectedListener, SeekBar.OnSeekBarChangeListener {
+public class Simple3Activity extends AppCompatActivity implements OnChartValueSelectedListener {
 
     private LineChart mChart;
-    private SeekBar mSeekBar;
+//    private SeekBar mSeekBar;
     private TextView tvX;
     SoundPool mySound;
     int raygunID;
     Entry e;
     MediaPlayer mp;
     Button btn, btn2;
+    Vibrator vibrator;
+
 
     final private ArrayList<Entry> entries = new ArrayList<Entry>();
 
     private void playmp(float a) {
-        float volume = ((a / (mChart.getYChartMax() - mChart.getYChartMin())) * mSeekBar.getProgress());
+//        float volume = ((a / (mChart.getYChartMax() - mChart.getYChartMin())) * mSeekBar.getProgress());
+        float volume = ((a / (mChart.getYChartMax() - mChart.getYChartMin())));
         mySound.play(raygunID, 1, 1, 1, 0, volume);
 
     }
@@ -46,34 +50,28 @@ public class Complex1Activity extends AppCompatActivity implements OnChartValueS
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_complex1);
+        setContentView(R.layout.activity_simple1);
 
         //ini adalah load Soundpool
         mySound = new SoundPool(6, AudioManager.STREAM_NOTIFICATION, 0);
         raygunID = mySound.load(this, R.raw.p1, 1);
+        vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
 
         tvX = (TextView) findViewById(R.id.freqChart);
 
-        mSeekBar = (SeekBar) findViewById(R.id.seekBar);
+/*        mSeekBar = (SeekBar) findViewById(R.id.seekBar);
         mSeekBar.setMax(5);
         mSeekBar.setProgress(1);
-        mSeekBar.setOnSeekBarChangeListener(this);
+        mSeekBar.setOnSeekBarChangeListener(this);*/
 
         mChart = (LineChart) findViewById(R.id.chart);
         mChart.setOnChartValueSelectedListener(this);
 
-        entries.add(new Entry(20F, 0));
-        entries.add(new Entry(40F, 1));
-        entries.add(new Entry(60F, 2));
-        entries.add(new Entry(40F, 3));
-        entries.add(new Entry(30F, 4));
-        entries.add(new Entry(20F, 5));
-        entries.add(new Entry(40F, 6));
-        entries.add(new Entry(60F, 7));
-        entries.add(new Entry(40F, 8));
-        entries.add(new Entry(30F, 9));
-        entries.add(new Entry(20F, 10));
-
+        entries.add(new Entry(2, 0));
+        entries.add(new Entry(5, 1));
+        entries.add(new Entry(3, 2));
+        entries.add(new Entry(8, 3));
+        entries.add(new Entry(6, 4));
         //for (int i = 0; i < 6; ++i)
         //    entries.add(new Entry(0.1F + (float) Math.random() * 20.0F, i));
 
@@ -85,12 +83,7 @@ public class Complex1Activity extends AppCompatActivity implements OnChartValueS
         labels.add("3");
         labels.add("4");
         labels.add("5");
-        labels.add("6");
-        labels.add("7");
-        labels.add("8");
-        labels.add("9");
-        labels.add("10");
-        labels.add("11");
+
 
         LineData data = new LineData(labels, dataset);
         dataset.setColors(ColorTemplate.COLORFUL_COLORS); //
@@ -102,7 +95,8 @@ public class Complex1Activity extends AppCompatActivity implements OnChartValueS
 
         btn = (Button) findViewById(R.id.button1);
         mp = MediaPlayer.create(this, R.raw.p1);
-
+        mChart.setScaleEnabled(false);
+        tvX.setText("3");
         btn.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -142,12 +136,13 @@ public class Complex1Activity extends AppCompatActivity implements OnChartValueS
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Complex1Activity.this, Complex2Activity.class));
+                startActivity(new Intent(Simple3Activity.this, Medium1Activity.class));
             }
         });
     }
 
 
+/*
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         tvX.setText("" + (mSeekBar.getProgress()));
@@ -168,10 +163,12 @@ public class Complex1Activity extends AppCompatActivity implements OnChartValueS
         // TODO Auto-generated method stub
 
     }
+*/
 
     @Override
     public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
         playmp(e.getVal());
+        vibrator.vibrate((long) e.getVal()*10);
     }
 
     @Override

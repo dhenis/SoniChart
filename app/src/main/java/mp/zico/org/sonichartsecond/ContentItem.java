@@ -1,4 +1,4 @@
-package mp.zico.org.sonichart;
+package mp.zico.org.sonichartsecond;
 
 /**
  * Created by zico on 11/06/2016.

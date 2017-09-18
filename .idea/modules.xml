@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SoniChart.iml" filepath="$PROJECT_DIR$/SoniChart.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SoniChartSecond.iml" filepath="$PROJECT_DIR$/SoniChartSecond.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

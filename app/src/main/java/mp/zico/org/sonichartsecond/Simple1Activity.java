@@ -1,9 +1,11 @@
-package mp.zico.org.sonichart;
+package mp.zico.org.sonichartsecond;
 
+import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -23,21 +25,24 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Medium1Activity extends AppCompatActivity implements OnChartValueSelectedListener, SeekBar.OnSeekBarChangeListener {
+//public class Simple1Activity extends AppCompatActivity implements OnChartValueSelectedListener, SeekBar.OnSeekBarChangeListener {
+    public class Simple1Activity extends AppCompatActivity implements OnChartValueSelectedListener {
 
     private LineChart mChart;
-    private SeekBar mSeekBar;
+//    private SeekBar mSeekBar;
     private TextView tvX;
     SoundPool mySound;
     int raygunID;
     Entry e;
     MediaPlayer mp;
     Button btn, btn2;
+    Vibrator vibrator;
 
     final private ArrayList<Entry> entries = new ArrayList<Entry>();
 
     private void playmp(float a) {
-        float volume = ((a / (mChart.getYChartMax() - mChart.getYChartMin())) * mSeekBar.getProgress());
+//        float volume = ((a / (mChart.getYChartMax() - mChart.getYChartMin())) * mSeekBar.getProgress());
+        float volume = ((a / (mChart.getYChartMax() - mChart.getYChartMin())));
         mySound.play(raygunID, 1, 1, 1, 0, volume);
 
     }
@@ -46,33 +51,36 @@ public class Medium1Activity extends AppCompatActivity implements OnChartValueSe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_medium1);
+        setContentView(R.layout.activity_simple1);
 
         //ini adalah load Soundpool
         mySound = new SoundPool(6, AudioManager.STREAM_NOTIFICATION, 0);
         raygunID = mySound.load(this, R.raw.p1, 1);
+//        vibrator = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
+        vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+
 
         tvX = (TextView) findViewById(R.id.freqChart);
 
-        mSeekBar = (SeekBar) findViewById(R.id.seekBar);
+/*        mSeekBar = (SeekBar) findViewById(R.id.seekBar);
         mSeekBar.setMax(5);
         mSeekBar.setProgress(1);
-        mSeekBar.setOnSeekBarChangeListener(this);
+        mSeekBar.setOnSeekBarChangeListener(this);*/
+
 
         mChart = (LineChart) findViewById(R.id.chart);
         mChart.setOnChartValueSelectedListener(this);
 
-        entries.add(new Entry(20F, 0));
-        entries.add(new Entry(40F, 1));
-        entries.add(new Entry(60F, 2));
-        entries.add(new Entry(40F, 3));
-        entries.add(new Entry(30F, 4));
-        entries.add(new Entry(20F, 5));
-        entries.add(new Entry(40F, 6));
-        entries.add(new Entry(60F, 7));
-        entries.add(new Entry(40F, 8));
-        entries.add(new Entry(30F, 9));
-        entries.add(new Entry(20F, 10));
+        entries.add(new Entry(1F, 0));
+        entries.add(new Entry(2F, 1));
+        entries.add(new Entry(3F, 2));
+        entries.add(new Entry(4F, 3));
+        entries.add(new Entry(5F, 4));
+        entries.add(new Entry(6F, 5));
+        entries.add(new Entry(7F, 6));
+        entries.add(new Entry(8F, 7));
+        entries.add(new Entry(9F, 8));
+        entries.add(new Entry(10F, 9));
 
         //for (int i = 0; i < 6; ++i)
         //    entries.add(new Entry(0.1F + (float) Math.random() * 20.0F, i));
@@ -90,7 +98,6 @@ public class Medium1Activity extends AppCompatActivity implements OnChartValueSe
         labels.add("8");
         labels.add("9");
         labels.add("10");
-        labels.add("11");
 
         LineData data = new LineData(labels, dataset);
         dataset.setColors(ColorTemplate.COLORFUL_COLORS); //
@@ -99,6 +106,8 @@ public class Medium1Activity extends AppCompatActivity implements OnChartValueSe
 
         mChart.setData(data);
         mChart.animateY(1000);
+        mChart.setScaleEnabled(false);
+        tvX.setText("1");
 
         btn = (Button) findViewById(R.id.button1);
         mp = MediaPlayer.create(this, R.raw.p1);
@@ -142,12 +151,12 @@ public class Medium1Activity extends AppCompatActivity implements OnChartValueSe
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Medium1Activity.this, Medium2Activity.class));
+                startActivity(new Intent(Simple1Activity.this, Simple2Activity.class));
             }
         });
     }
 
-
+/**
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         tvX.setText("" + (mSeekBar.getProgress()));
@@ -168,10 +177,11 @@ public class Medium1Activity extends AppCompatActivity implements OnChartValueSe
         // TODO Auto-generated method stub
 
     }
-
+**/
     @Override
     public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
         playmp(e.getVal());
+        vibrator.vibrate((long) e.getVal()*10);
     }
 
     @Override

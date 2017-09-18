@@ -1,21 +1,16 @@
-package mp.zico.org.sonichart;
+package mp.zico.org.sonichartsecond;
 
-import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.github.mikephil.charting.utils.Utils;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements OnItemClickListener {
 
@@ -29,10 +24,10 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         Utils.init(this);
         ArrayList<ContentItem> objects = new ArrayList<ContentItem>();
 
-        objects.add(new ContentItem("Simple Chart", "4 simple Audio Chart ."));
+        objects.add(new ContentItem("Simple Chart", "3 simple Audio Chart ."));
         objects.add(new ContentItem("Medium Chart",
-                "6 medium Audio Chart."));
-        objects.add(new ContentItem("Complex Chart", "6 complex Audio Chart."));
+                "3 medium Audio Chart."));
+        objects.add(new ContentItem("Complex Chart", "3 complex Audio Chart."));
 
         MyAdapter adapter = new MyAdapter(this, objects);
 
